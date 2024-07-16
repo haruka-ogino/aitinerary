@@ -33,7 +33,13 @@ const NavBar = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">
               <NavItem>
-                <PageLink href="/" className="nav-link" testId="navbar-home">
+                <PageLink
+                  href="/"
+                  className="nav-link"
+                  testId="navbar-home"
+                  icon={null}
+                  tabIndex={null}
+                >
                   Home
                 </PageLink>
               </NavItem>
