@@ -47,7 +47,7 @@ export default function MyCalendar() {
         selectable
         // onSelectSlot={handleSelectSlot}
         resizable
-        style={{ height: '100vh' }}
+        // style={{ height: '80vh' }}
       />
     </div>
   )
