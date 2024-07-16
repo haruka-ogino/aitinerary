@@ -1,12 +1,15 @@
 import React from 'react'
 import { usePathname } from 'next/navigation'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome'
 
 interface Props {
   children: string
   href: string
   className: string
-  icon: string
+  icon: FontAwesomeIconProps['icon']
   tabIndex: number
   testId: string
 }
