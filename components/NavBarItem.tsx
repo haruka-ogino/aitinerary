@@ -2,7 +2,23 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const NavBarItem = ({ children, href, className, icon, tabIndex, testId }) => {
+interface Props {
+  children: string
+  href: string
+  className: string
+  icon: string
+  tabIndex: number
+  testId: string
+}
+
+const NavBarItem = ({
+  children,
+  href,
+  className,
+  icon,
+  tabIndex,
+  testId,
+}: Props) => {
   const pathname = usePathname()
   const activeClass = 'navbar-item-active'
   const activeClasses = className ? `${className} ${activeClass}` : activeClass
