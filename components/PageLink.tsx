@@ -8,8 +8,8 @@ interface Props {
   children: string
   href: string
   className: string
-  icon: FontAwesomeIconProps['icon']
-  tabIndex: number
+  icon: FontAwesomeIconProps['icon'] | null
+  tabIndex: number | null
   testId: string
 }
 

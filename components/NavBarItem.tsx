@@ -9,8 +9,8 @@ interface Props {
   children: string
   href: string
   className: string
-  icon: FontAwesomeIconProps['icon']
-  tabIndex: number
+  icon: FontAwesomeIconProps['icon'] | null
+  tabIndex: number | null
   testId: string
 }
 
@@ -31,7 +31,7 @@ const NavBarItem = ({
       {icon && <FontAwesomeIcon icon={icon} className="mr-3" />}
       <span
         className={pathname === href ? activeClasses : className}
-        tabIndex={tabIndex}
+        tabIndex={tabIndex ? tabIndex : 0}
         data-testid={testId}
       >
         {children}
