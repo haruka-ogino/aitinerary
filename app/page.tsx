@@ -30,6 +30,12 @@ export default function Home() {
     setUpProviders()
   }, [])
 
+  useEffect(() => {
+\
+    }
+
+  }, [])
+
   return (
     <>
       {session?.user ? (
@@ -63,6 +69,7 @@ export default function Home() {
             ))}
         </>
       )}
+
     </>
   )
 }

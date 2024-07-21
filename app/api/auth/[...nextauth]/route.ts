@@ -1,6 +1,6 @@
 import NextAuth, { Session, DefaultSession } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import { connectToDB } from '@utils/database'
+// import { connectToDB } from '@utils/database'
 import User from '@models/user'
 
 declare module 'next-auth' {
