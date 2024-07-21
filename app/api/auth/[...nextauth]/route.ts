@@ -15,11 +15,6 @@ declare module 'next-auth' {
   }
 }
 
-console.log({
-  clientId: process.env.GOOGLE_ID as string,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-})
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
