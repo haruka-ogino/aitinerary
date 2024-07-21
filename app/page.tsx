@@ -21,20 +21,26 @@ export default function Home() {
     ClientSafeProvider
   > | null>(null)
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const res = await getProviders()
-      setProviders(res)
-    }
-
-    setUpProviders()
-  }, [])
+  const [persons, setPersons] = useState([])
 
   useEffect(() => {
-\
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/check')
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        const data = await response.json()
+        setPersons(data)
+        console.log(data)
+      } catch (error) {
+        return error
+      }
     }
 
+    fetchData()
   }, [])
+  console.log('hellooo')
 
   return (
     <>
@@ -69,7 +75,6 @@ export default function Home() {
             ))}
         </>
       )}
-
     </>
   )
 }
