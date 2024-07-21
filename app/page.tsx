@@ -3,7 +3,7 @@
 import MyCalendar from '@/components/MyCalendar'
 export default function Home() {
   return (
-    <div className="w-96">
+    <div className="max-w-7xl">
       <MyCalendar />
     </div>
   )
