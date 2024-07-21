@@ -4,8 +4,8 @@ import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 
 export const metadata = {
-  title: 'Promptopia',
-  description: 'Discover & Share AI Promps',
+  title: 'AItinerary',
+  description: 'Discover the world around you',
 }
 
 interface RootLayoutProps {

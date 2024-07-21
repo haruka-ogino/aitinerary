@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import {
   signIn,
-  signOut,
   useSession,
   getProviders,
   LiteralUnion,
@@ -41,14 +40,26 @@ export default function Home() {
         <>
           {providers &&
             Object.values(providers).map((provider) => (
-              <button
-                type="button"
-                key={provider.name}
-                onClick={() => signIn(provider.id)}
-                className="black_btn"
-              >
-                Sign In
-              </button>
+              <>
+                <Link href="/" className="flex gap-2 flex-center">
+                  <Image
+                    src="/assets/images/logo.svg"
+                    alt="Promptopia Logo"
+                    width={30}
+                    height={30}
+                    className="object-contain"
+                  />
+                  <p className="logo_text">AItinerary</p>
+                </Link>
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In
+                </button>
+              </>
             ))}
         </>
       )}
