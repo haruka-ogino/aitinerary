@@ -1,28 +1,36 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Provider from '@/components/Provider'
+import '@styles/globals.css'
+import { ReactNode } from 'react'
+import Nav from '@components/Nav'
+import Provider from '@components/Provider'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'AItinerary',
-  description: '',
+export const metadata = {
+  title: 'Promptopia',
+  description: 'Discover & Share AI Promps',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
-      <head>{/* <link rel="icon" href="" type="" /> */}</head>
+      <head>
+        <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml" />
+      </head>
       <body>
-        <Provider session={undefined}>
-          <main className="app">{children}</main>
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
         </Provider>
       </body>
     </html>
   )
 }
+
+export default RootLayout
