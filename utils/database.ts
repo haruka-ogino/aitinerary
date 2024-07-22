@@ -10,13 +10,14 @@ export const pool = new Pool({
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   ssl: {
+    // requestCert: true,
     rejectUnauthorized: false,
-    ca: fs.readFileSync(__dirname + 'ap-southeast-2-bundle.pem'),
-    cert: fs.readFileSync(__dirname + 'client-key.pem'),
-    key: fs.readFileSync(__dirname + 'client-cert.pem'),
+    // ca: fs.readFileSync('../ap-southeast-2-bundle.pem').toString(),
   },
 })
 
 // module.exports = {
 //   query: (text: string, params) => pool.query(text, params),
 // }
+// cert: fs.readFileSync(__dirname + 'client-key.pem'),
+// key: fs.readFileSync(__dirname + 'client-cert.pem'),

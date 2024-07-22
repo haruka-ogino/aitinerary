@@ -43,25 +43,25 @@ const handler = NextAuth({
     },
     async signIn({ profile }) {
       try {
-        if (profile?.email) {
-          const result = await pool.query(
-            'SELECT * FROM person WHERE email = $1',
-            [profile.email]
-          )
-          if (result.rows.length === 0) {
-            // Insert the new user if they don't exist
-            await pool.query(
-              'INSERT INTO person (id, email, given_name, family_name, picture) VALUES ($1, $2, $3, $4,$5)',
-              [
-                profile.sub,
-                profile.email,
-                profile.given_name,
-                profile.family_name,
-                profile.picture,
-              ]
-            )
-          }
-        }
+        // if (profile?.email) {
+        //   const result = await pool.query(
+        //     'SELECT * FROM person WHERE email = $1',
+        //     [profile.email]
+        //   )
+        //   if (result.rows.length === 0) {
+        //     // Insert the new user if they don't exist
+        //     await pool.query(
+        //       'INSERT INTO person (id, email, given_name, family_name, picture) VALUES ($1, $2, $3, $4,$5)',
+        //       [
+        //         profile.sub,
+        //         profile.email,
+        //         profile.given_name,
+        //         profile.family_name,
+        //         profile.picture,
+        //       ]
+        //     )
+        //   }
+        // }
 
         return true
       } catch (error) {
