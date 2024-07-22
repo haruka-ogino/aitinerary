@@ -24,6 +24,15 @@ export default function Home() {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
+    const setUpProviders = async () => {
+      const res = await getProviders()
+      setProviders(res)
+    }
+
+    setUpProviders()
+  }, [])
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/api/check')
@@ -32,7 +41,6 @@ export default function Home() {
         }
         const data = await response.json()
         setPersons(data)
-        console.log(data)
       } catch (error) {
         return error
       }
@@ -40,7 +48,6 @@ export default function Home() {
 
     fetchData()
   }, [])
-  console.log('hellooo')
 
   return (
     <>
@@ -52,7 +59,7 @@ export default function Home() {
         <>
           {providers &&
             Object.values(providers).map((provider) => (
-              <>
+              <div key={provider.name}>
                 <Link href="/" className="flex gap-2 flex-center">
                   <Image
                     src="/assets/images/logo.svg"
@@ -71,7 +78,7 @@ export default function Home() {
                 >
                   Sign In
                 </button>
-              </>
+              </div>
             ))}
         </>
       )}
