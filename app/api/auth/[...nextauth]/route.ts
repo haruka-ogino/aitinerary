@@ -25,37 +25,25 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }): Promise<Session> {
-      // if (session.user) {
-      // console.log(session.user)
-      // }
-
-      // session.user outputs
-      // {name:'', email:'', image:'img link'}
-
-      // if (session.user && session.user.email) {
-      //   const sessionUser = await User.findOne({
-      //     email: session.user.email,
-      //   })
-      //   if (sessionUser) {
-      //     session.user.id = sessionUser._id.toString()
-      //   }
-      // }
+      if (session.user && session.user.email) {
+        try {
+          const result = await pool.query(
+            'SELECT id FROM person WHERE email = $1',
+            [session.user.email]
+          )
+          if (result.rows.length > 0) {
+            session.user.id = result.rows[0].id.toString()
+          }
+        } catch (error) {
+          console.error('Error fetching user ID', error)
+        }
+      }
 
       return session
     },
     async signIn({ profile }) {
       try {
         if (profile?.email) {
-          // console.log(profile) output:
-          // sub: '107958491462184596092',
-          // email: 'harukariq@gmail.com',
-          // email_verified: true,
-          // at_hash: 'FPG46e6x-MV_qmmhzS4LKQ',
-          // name: 'Haruka Ogino',
-          // picture: 'https://lh3.googleusercontent.com/a/ACg8ocIwMihq-j6Raa7Is1A9CuzLwYTTp4uEIF1dwpwunOl5wUBQYQ=s96-c',
-          // given_name: 'Haruka',
-          // family_name: 'Ogino',
-          // check if the user already exists in the database
           const result = await pool.query(
             'SELECT * FROM person WHERE email = $1',
             [profile.email]
