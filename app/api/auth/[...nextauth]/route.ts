@@ -64,26 +64,6 @@ const handler = NextAuth({
         }
 
         return true
-        // await connectToDB()
-
-        // if (!profile || !profile.email) {
-        //   return false
-        // }
-        // // check if user exists
-        // const userExists = await User.findOne({
-        //   email: profile.email,
-        // })
-        // create this user if it does not
-        // if (!userExists) {
-        //   await User.create({
-        //     email: profile.email,
-        //     username: profile.name
-        //       ? profile.name.replace(' ', '').toLowerCase()
-        //       : '',
-        //     image: profile.picture ?? '', // Assuming profile.picture is not available, use a fallback
-        //   })
-        // }
-        // return true
       } catch (error) {
         console.log(error)
         return false
