@@ -40,6 +40,7 @@ export default function Home() {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
+
         setPersons(data)
       } catch (error) {
         return error

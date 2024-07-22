@@ -1,7 +1,6 @@
 import NextAuth, { Session, DefaultSession } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-// import { connectToDB } from '@utils/database'
-import User from '@models/user'
+import { pool } from '@utils/database'
 
 declare module 'next-auth' {
   interface Session {
@@ -12,6 +11,8 @@ declare module 'next-auth' {
 
   interface Profile {
     picture?: string | null
+    given_name: string
+    family_name: string
   }
 }
 
@@ -24,6 +25,13 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }): Promise<Session> {
+      // if (session.user) {
+      // console.log(session.user)
+      // }
+
+      // session.user outputs
+      // {name:'', email:'', image:'img link'}
+
       // if (session.user && session.user.email) {
       //   const sessionUser = await User.findOne({
       //     email: session.user.email,
@@ -37,6 +45,37 @@ const handler = NextAuth({
     },
     async signIn({ profile }) {
       try {
+        if (profile?.email) {
+          // console.log(profile) output:
+          // sub: '107958491462184596092',
+          // email: 'harukariq@gmail.com',
+          // email_verified: true,
+          // at_hash: 'FPG46e6x-MV_qmmhzS4LKQ',
+          // name: 'Haruka Ogino',
+          // picture: 'https://lh3.googleusercontent.com/a/ACg8ocIwMihq-j6Raa7Is1A9CuzLwYTTp4uEIF1dwpwunOl5wUBQYQ=s96-c',
+          // given_name: 'Haruka',
+          // family_name: 'Ogino',
+          // check if the user already exists in the database
+          const result = await pool.query(
+            'SELECT * FROM person WHERE email = $1',
+            [profile.email]
+          )
+          if (result.rows.length === 0) {
+            // Insert the new user if they don't exist
+            await pool.query(
+              'INSERT INTO person (id, email, given_name, family_name, picture) VALUES ($1, $2, $3, $4,$5)',
+              [
+                profile.sub,
+                profile.email,
+                profile.given_name,
+                profile.family_name,
+                profile.picture,
+              ]
+            )
+          }
+        }
+
+        return true
         // await connectToDB()
 
         // if (!profile || !profile.email) {
@@ -56,7 +95,7 @@ const handler = NextAuth({
         //     image: profile.picture ?? '', // Assuming profile.picture is not available, use a fallback
         //   })
         // }
-        return true
+        // return true
       } catch (error) {
         console.log(error)
         return false
