@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server'
 
 export const GET = async () => {
   try {
-    const result = await pool.query('SELECT * FROM person')
+    const result = await pool.query('SELECT * FROM event')
+    console.log(result.rows)
 
     return NextResponse.json(result.rows)
   } catch (error) {

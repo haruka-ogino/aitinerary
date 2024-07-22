@@ -1,4 +1,5 @@
 import { Pool } from 'pg'
+import fs from 'fs'
 
 const portNum = Number(process.env.DATABASE_PORT)
 
@@ -10,6 +11,9 @@ export const pool = new Pool({
   password: process.env.DATABASE_PASSWORD,
   ssl: {
     rejectUnauthorized: false,
+    ca: fs.readFileSync(__dirname + 'ap-southeast-2-bundle.pem'),
+    cert: fs.readFileSync(__dirname + 'client-key.pem'),
+    key: fs.readFileSync(__dirname + 'client-cert.pem'),
   },
 })
 

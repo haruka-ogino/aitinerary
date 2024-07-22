@@ -25,19 +25,19 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }): Promise<Session> {
-      if (session.user && session.user.email) {
-        try {
-          const result = await pool.query(
-            'SELECT id FROM person WHERE email = $1',
-            [session.user.email]
-          )
-          if (result.rows.length > 0) {
-            session.user.id = result.rows[0].id.toString()
-          }
-        } catch (error) {
-          console.error('Error fetching user ID', error)
-        }
-      }
+      // if (session.user && session.user.email) {
+      //   try {
+      //     const result = await pool.query(
+      //       'SELECT id FROM person WHERE email = $1',
+      //       [session.user.email]
+      //     )
+      //     if (result.rows.length > 0) {
+      //       session.user.id = result.rows[0].id.toString()
+      //     }
+      //   } catch (error) {
+      //     console.error('Error fetching user ID', error)
+      //   }
+      // }
 
       return session
     },

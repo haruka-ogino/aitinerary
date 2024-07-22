@@ -16,16 +16,15 @@ import moment from 'moment'
 import { enNZ } from 'date-fns/locale/en-NZ'
 
 const localizer = momentLocalizer(moment)
-
+const DnDCalendar = withDragAndDrop(Calendar)
 export default function MyCalendar() {
-  const DnDCalendar = withDragAndDrop(Calendar)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const locales = {
     'en-NZ': enNZ,
   }
 
-  const eventStart = new Date('2024-05-18T14:30:00.000+12:00')
-  const eventEnd = new Date('2024-05-18T16:00:00.000+12:00')
+  const eventStart = new Date('2024-07-23T14:30:00.000+12:00')
+  const eventEnd = new Date('2024-07-23T16:00:00.000+12:00')
 
   const [events, setEvents] = useState<Event[]>([
     {
@@ -37,6 +36,16 @@ export default function MyCalendar() {
 
   const [view, setView]: any = useState('day')
   const onView = useCallback((newView: string) => setView(newView), [view])
+  const handleSelectSlot = useCallback(({ start, end }: any) => {
+    // () => {
+    console.log('empty slot')
+    console.log(start)
+    // const title = window.prompt('New Event name')
+    onOpen()
+    // if (title) {
+    //   setEvents((prev) => [...prev, { start, end, title }])
+    // }
+  }, [])
   return (
     <div>
       <DnDCalendar
@@ -45,7 +54,7 @@ export default function MyCalendar() {
         events={events}
         localizer={localizer}
         selectable
-        // onSelectSlot={handleSelectSlot}
+        onSelectSlot={handleSelectSlot}
         resizable
         // style={{ height: '80vh' }}
       />
