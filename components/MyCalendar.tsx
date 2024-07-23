@@ -1,18 +1,10 @@
 'use client'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import {
-  Calendar,
-  dateFnsLocalizer,
-  DateLocalizer,
-  Event,
-  momentLocalizer,
-  View,
-} from 'react-big-calendar'
+import { Calendar, Event, momentLocalizer, View } from 'react-big-calendar'
 import { useCallback, useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import { enNZ } from 'date-fns/locale/en-NZ'
 
@@ -65,7 +57,7 @@ export default function MyCalendar() {
         onSelectSlot={handleSelectSlot}
         resizable
         showMultiDayTimes
-        // style={{ height: '80vh' }}
+        style={{ height: '80vh' }}
       />
     </div>
   )
