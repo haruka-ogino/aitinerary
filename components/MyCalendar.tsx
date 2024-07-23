@@ -16,8 +16,9 @@ import moment from 'moment'
 import { enNZ } from 'date-fns/locale/en-NZ'
 
 const localizer = momentLocalizer(moment)
-const DnDCalendar = withDragAndDrop(Calendar)
+
 export default function MyCalendar() {
+  const DnDCalendar = withDragAndDrop(Calendar)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const locales = {
     'en-NZ': enNZ,
@@ -56,7 +57,6 @@ export default function MyCalendar() {
         selectable
         onSelectSlot={handleSelectSlot}
         resizable
-
         // style={{ height: '80vh' }}
       />
     </div>
