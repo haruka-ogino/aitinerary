@@ -19,15 +19,15 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
         <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml" />
       </head>
       <body>
-        {/* <Provider> */}
-        <div className="main">
-          <div className="gradient" />
-        </div>
-        <main className="app">
-          {/* <Nav /> */}
-          {children}
-        </main>
-        {/* </Provider> */}
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   )
