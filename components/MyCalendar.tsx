@@ -6,6 +6,7 @@ import {
   DateLocalizer,
   Event,
   momentLocalizer,
+  View,
 } from 'react-big-calendar'
 import { useCallback, useState } from 'react'
 import { useDisclosure } from '@chakra-ui/react'
@@ -35,10 +36,14 @@ export default function MyCalendar() {
     },
   ])
 
-  const [view, setView]: any = useState('day')
-  const onView = useCallback((newView: string) => setView(newView), [view])
+  const [view, setView] = useState<View>('day')
+  const [date, setDate] = useState<Date>(new Date())
+
+  const onView = useCallback((newView: View) => setView(newView), [view])
+
+  const onNavigate = useCallback((newDate: Date) => setDate(newDate), [date])
+
   const handleSelectSlot = useCallback(({ start, end }: any) => {
-    // () => {
     console.log('empty slot')
     console.log(start)
     // const title = window.prompt('New Event name')
@@ -53,10 +58,13 @@ export default function MyCalendar() {
         view={view}
         onView={onView}
         events={events}
+        date={date}
+        onNavigate={onNavigate}
         localizer={localizer}
         selectable
         onSelectSlot={handleSelectSlot}
         resizable
+        showMultiDayTimes
         // style={{ height: '80vh' }}
       />
     </div>
